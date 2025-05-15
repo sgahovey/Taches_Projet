@@ -1,14 +1,29 @@
   package com.dreams.hellowordspring.taches.Model;
 
-  import jakarta.persistence.Column;
-  import jakarta.persistence.Entity;
-  import jakarta.persistence.Id;
-  import jakarta.persistence.Table;
+  import jakarta.persistence.*;
+
+  import java.io.Serializable;
+  import java.util.Set;
 
   @Entity
   @Table(name = "utilisateur")
-  public class Utilisateur {
+
+
+  public class Utilisateur implements Serializable  {
+
+    @ManyToMany
+    private Set<Tache> taches;
+
+    public Set<Tache> getTaches() {
+      return taches;
+    }
+
+    public void setTaches(Set<Tache> taches) {
+      this.taches = taches;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
   private Long id;
     private String nom;

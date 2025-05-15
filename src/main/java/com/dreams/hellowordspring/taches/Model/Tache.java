@@ -1,14 +1,29 @@
     package com.dreams.hellowordspring.taches.Model;
 
+    import com.fasterxml.jackson.annotation.JsonIgnore;
     import jakarta.persistence.*;
 
     import java.time.LocalDate;
+    import java.util.Set;
 
     @Entity
     @Table(name = "tache")
     @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
     public class Tache {
+
+        @ManyToMany(mappedBy = "taches")
+        @JsonIgnore
+        private Set<Utilisateur> utilisateurs;
+
+        public Set<Utilisateur> getUtilisateurs() {
+            return utilisateurs;
+        }
+
+        public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
+            this.utilisateurs = utilisateurs;
+        }
+
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         @Column(name = "id", nullable = false)
@@ -19,6 +34,7 @@
         private boolean estComplete;
         private LocalDate dateDebut;
         private LocalDate dateFin;
+
 
         public Tache() {}
 
