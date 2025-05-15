@@ -8,6 +8,8 @@
     @Entity
     @Table(name = "tache_complexe")
     public class TacheComplexe extends Tache {
+
+
         public TacheComplexe() {}
 
         public TacheComplexe(Long id, String nom, String description, boolean estComplete, LocalDate dateDebut, LocalDate dateFin) {
