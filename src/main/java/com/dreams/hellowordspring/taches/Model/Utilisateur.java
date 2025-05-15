@@ -11,17 +11,6 @@
 
   public class Utilisateur implements Serializable  {
 
-    @ManyToMany
-    private Set<Tache> taches;
-
-    public Set<Tache> getTaches() {
-      return taches;
-    }
-
-    public void setTaches(Set<Tache> taches) {
-      this.taches = taches;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -32,6 +21,16 @@
     private String email;
     private String mdp;
 
+    @ManyToMany
+    private Set<Tache> taches;
+
+    public Set<Tache> getTaches() {
+      return taches;
+    }
+
+    public void setTaches(Set<Tache> taches) {
+      this.taches = taches;
+    }
 
     public Utilisateur() {}
     public Utilisateur(Long id, String nom, String prenom, String login, String email, String mdp) {
