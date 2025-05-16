@@ -3,6 +3,7 @@
   import jakarta.persistence.*;
 
   import java.io.Serializable;
+  import java.util.HashSet;
   import java.util.Set;
 
   @Entity
@@ -22,7 +23,12 @@
     private String mdp;
 
     @ManyToMany
-    private Set<Tache> taches;
+    @JoinTable(
+            name = "utilisateur_taches",
+            joinColumns = @JoinColumn(name = "utilisateur_id"),
+            inverseJoinColumns = @JoinColumn(name = "tache_id")
+    )
+    private Set<Tache> taches = new HashSet<>();
 
     public Set<Tache> getTaches() {
       return taches;

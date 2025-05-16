@@ -1,55 +1,47 @@
-    package com.dreams.hellowordspring.taches.Model;
+        package com.dreams.hellowordspring.taches.Model;
 
-    import com.fasterxml.jackson.annotation.JsonIgnore;
-    import jakarta.persistence.Entity;
-    import jakarta.persistence.ManyToMany;
-    import jakarta.persistence.Table;
+        import com.fasterxml.jackson.annotation.JsonIgnore;
+        import jakarta.persistence.*;
 
-    import java.time.LocalDate;
-    import java.util.HashSet;
-    import java.util.Set;
+        import java.time.LocalDate;
+        import java.util.HashSet;
+        import java.util.Set;
 
-    @Entity
-    @Table(name = "tache_complexe")
-    public class TacheComplexe extends Tache {
+        @Entity
+        @Table(name = "tache_complexe")
+        public class TacheComplexe extends Tache {
 
-        @ManyToMany
-        @JsonIgnore
 
-        private Set<TacheSimple> sousTaches = new HashSet<>();
 
-        @ManyToMany(mappedBy = "tachesComplexes")
-        @JsonIgnore
-        private Set<Projet> projets = new HashSet<>();
+            @ManyToMany
+            @JoinTable(
+                    name = "complexe_sous_taches",
+                    joinColumns = @JoinColumn(name = "tache_complexe_id"),
+                    inverseJoinColumns = @JoinColumn(name = "tache_simple_id")
+            )
+            private Set<TacheSimple> sousTaches = new HashSet<>();
 
-        public Set<Projet> getProjets() {
-            return projets;
+
+
+            public TacheComplexe() {}
+
+            public TacheComplexe(Long id, String nom, String description, boolean estComplete, LocalDate dateDebut, LocalDate dateFin) {
+                super(id, nom, description, estComplete, dateDebut, dateFin);
+            }
+
+            public Set<TacheSimple> getSousTaches() {
+                return sousTaches;
+            }
+
+            public void setSousTaches(Set<TacheSimple> sousTaches) {
+                this.sousTaches = sousTaches;
+            }
+
+            public void addSousTache(TacheSimple tacheSimple) {
+                this.sousTaches.add(tacheSimple);
+            }
+
+            public void deleteSousTache(TacheSimple tacheSimple) {
+                this.sousTaches.remove(tacheSimple);
+            }
         }
-
-        public void setProjets(Set<Projet> projets) {
-            this.projets = projets;
-        }
-
-
-        public TacheComplexe() {}
-
-        public TacheComplexe(Long id, String nom, String description, boolean estComplete, LocalDate dateDebut, LocalDate dateFin) {
-            super(id, nom, description, estComplete, dateDebut, dateFin);
-        }
-
-        public Set<TacheSimple> getSousTaches() {
-            return sousTaches;
-        }
-
-        public void setSousTaches(Set<TacheSimple> sousTaches) {
-            this.sousTaches = sousTaches;
-        }
-
-        public void addSousTache(TacheSimple tacheSimple) {
-            this.sousTaches.add(tacheSimple);
-        }
-
-        public void deleteSousTache(TacheSimple tacheSimple) {
-            this.sousTaches.remove(tacheSimple);
-        }
-    }

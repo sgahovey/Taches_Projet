@@ -26,7 +26,9 @@ public class TacheComplexeController {
 
         if (tacheComplexe != null && tacheSimple != null) {
             tacheComplexe.addSousTache(tacheSimple);
+            tacheSimple.getTacheComplexes().add(tacheComplexe);
             tacheComplexeRepository.save(tacheComplexe);
+
         }
     }
     // Récupérer les sous-tâches d'une tâche complexe
