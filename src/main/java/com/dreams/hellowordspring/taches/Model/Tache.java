@@ -1,98 +1,97 @@
-    package com.dreams.hellowordspring.taches.Model;
+        package com.dreams.hellowordspring.taches.Model;
 
-    import com.fasterxml.jackson.annotation.JsonIgnore;
-    import jakarta.persistence.*;
+        import com.fasterxml.jackson.annotation.JsonIgnore;
+        import jakarta.persistence.*;
 
-    import java.time.LocalDate;
-    import java.util.Set;
+        import java.time.LocalDate;
+        import java.util.Set;
 
-    @Entity
-    @Table(name = "tache")
-    @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+        @Entity
+        @Table(name = "tache")
+        @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-    public class Tache {
+        public class Tache {
 
-        @ManyToMany(mappedBy = "taches")
-        @JsonIgnore
-        private Set<Utilisateur> utilisateurs;
+            @ManyToMany(mappedBy = "taches")
+            @JsonIgnore
+            private Set<Utilisateur> utilisateurs;
 
-        public Set<Utilisateur> getUtilisateurs() {
-            return utilisateurs;
+            public Set<Utilisateur> getUtilisateurs() {
+                return utilisateurs;
+            }
+
+            public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
+                this.utilisateurs = utilisateurs;
+            }
+
+            @Id
+            @GeneratedValue(strategy = GenerationType.AUTO)
+            @Column(name = "id", nullable = false)
+            private Long id;
+
+            private String nom;
+            private String description;
+            private boolean estComplete;
+            private LocalDate dateDebut;
+            private LocalDate dateFin;
+
+
+            public Tache() {}
+
+            public Tache(Long id, String nom, String description, boolean estComplete, LocalDate dateDebut, LocalDate dateFin) {
+                this.id = id;
+                this.nom = nom;
+                this.description = description;
+                this.estComplete = estComplete;
+                this.dateDebut = dateDebut;
+                this.dateFin = dateFin;
+            }
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public String getNom() {
+                return nom;
+            }
+
+            public void setNom(String nom) {
+                this.nom = nom;
+            }
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+
+            public boolean isEstComplete() {
+                return estComplete;
+            }
+
+            public void setEstComplete(boolean estComplete) {
+                this.estComplete = estComplete;
+            }
+
+            public LocalDate getDateDebut() {
+                return dateDebut;
+            }
+
+            public void setDateDebut(LocalDate dateDebut) {
+                this.dateDebut = dateDebut;
+            }
+
+            public LocalDate getDateFin() {
+                return dateFin;
+            }
+
+            public void setDateFin(LocalDate dateFin) {
+                this.dateFin = dateFin;
+            }
         }
-
-        public void setUtilisateurs(Set<Utilisateur> utilisateurs) {
-            this.utilisateurs = utilisateurs;
-        }
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "id", nullable = false)
-        private Long id;
-
-        private String nom;
-        private String description;
-        private boolean estComplete;
-        private LocalDate dateDebut;
-        private LocalDate dateFin;
-
-
-        public Tache() {}
-
-        public Tache(Long id, String nom, String description, boolean estComplete, LocalDate dateDebut, LocalDate dateFin) {
-            this.id = id;
-            this.nom = nom;
-            this.description = description;
-            this.estComplete = estComplete;
-            this.dateDebut = dateDebut;
-            this.dateFin = dateFin;
-        }
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        public String getNom() {
-            return nom;
-        }
-
-        public void setNom(String nom) {
-            this.nom = nom;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public boolean isEstComplete() {
-            return estComplete;
-        }
-
-        public void setEstComplete(boolean estComplete) {
-            this.estComplete = estComplete;
-        }
-
-        public LocalDate getDateDebut() {
-            return dateDebut;
-        }
-
-        public void setDateDebut(LocalDate dateDebut) {
-            this.dateDebut = dateDebut;
-        }
-
-        public LocalDate getDateFin() {
-            return dateFin;
-        }
-
-        public void setDateFin(LocalDate dateFin) {
-            this.dateFin = dateFin;
-        }
-    }
