@@ -18,6 +18,19 @@
 
         private Set<TacheSimple> sousTaches = new HashSet<>();
 
+        @ManyToMany(mappedBy = "tachesComplexes")
+        @JsonIgnore
+        private Set<Projet> projets = new HashSet<>();
+
+        public Set<Projet> getProjets() {
+            return projets;
+        }
+
+        public void setProjets(Set<Projet> projets) {
+            this.projets = projets;
+        }
+
+
         public TacheComplexe() {}
 
         public TacheComplexe(Long id, String nom, String description, boolean estComplete, LocalDate dateDebut, LocalDate dateFin) {

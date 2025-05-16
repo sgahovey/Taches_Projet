@@ -17,6 +17,18 @@ public class TacheSimple extends Tache {
     @JsonIgnore
     private Set<TacheComplexe> tacheComplexes = new HashSet<>();
 
+    @ManyToMany(mappedBy = "tachesSimples")
+    @JsonIgnore
+    private Set<Projet> projets = new HashSet<>();
+
+    public Set<Projet> getProjets() {
+        return projets;
+    }
+
+    public void setProjets(Set<Projet> projets) {
+        this.projets = projets;
+    }
+
     public TacheSimple() {
     }
 
